@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="ScoreUp — навчальний вебзастосунок для вивчення теоретичних матеріалів і перевірки знань за допомогою тестів."
+    />
+    <title>ScoreUp — платформа для перевірки знань</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="images/favicon.png" type="image/png" />
+  </head>
+  <body>
+    <div id="resume-banner" class="resume-banner">
+      <div class="resume-banner__body">
+        <svg
+          class="resume-banner__icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
+          />
+          <polyline points="17 21 17 13 7 13 7 21" />
+          <polyline points="7 3 7 8 15 8" />
+        </svg>
+        <span id="resume-info" class="resume-banner__text"
+          >Незавершений тест</span
+        >
+      </div>
+      <div class="resume-banner__actions">
+        <button class="btn btn--primary btn--sm" onclick="resumeQuiz()">
+          Продовжити
+        </button>
+        <button class="btn btn--ghost btn--sm" onclick="discardSavedProgress()">
+          Скасувати
+        </button>
+      </div>
+    </div>
+
+    <div id="page-home" class="page active">
+      <div class="hero">
+        <div class="hero__logo">
+          <h1 class="logo-title">ScoreUp</h1>
+        </div>
+        <p class="hero__tagline">
+          Вебплатформа для перевірки знань і вивчення навчальних матеріалів
+        </p>
+        <p class="hero__desc">
+          ScoreUp — це навчальний вебзастосунок, який поєднує теоретичні
+          матеріали та систему тестування знань. Платформа дозволяє проходити
+          тести за окремими розділами або комплексно, а також переглядати
+          результати після завершення тестування.
+        </p>
+        <div class="hero__actions">
+          <button class="btn btn--primary" onclick="showPage('page-tests')">
+            До тестування
+          </button>
+          <button class="btn btn--secondary" onclick="showPage('page-learn')">
+            Навчальні матеріали
+          </button>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature-card">
+          <svg
+            class="feature-card__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+            <path
+              d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+            />
+          </svg>
+          <h3 class="feature-card__title">Навчальні матеріали</h3>
+          <p class="feature-card__desc">
+            Ознайомлення з теоретичними матеріалами за кожним розділом перед
+            проходженням тестування.
+          </p>
+        </div>
+        <div class="feature-card">
+          <svg
+            class="feature-card__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"
+            />
+            <rect x="9" y="3" width="6" height="4" rx="1" />
+            <path d="M9 14l2 2 4-4" />
+          </svg>
+          <h3 class="feature-card__title">Гнучке тестування</h3>
+          <p class="feature-card__desc">
+            Проходження тестів за окремими розділами, підрозділами або
+            комплексне тестування з усіх тем.
+          </p>
+        </div>
+        <div class="feature-card">
+          <svg
+            class="feature-card__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <h3 class="feature-card__title">Аналіз результатів</h3>
+          <p class="feature-card__desc">
+            Перегляд кількості набраних балів, правильних відповідей та розбору
+            виконаного тесту.
+          </p>
+        </div>
+        <div class="feature-card">
+          <svg
+            class="feature-card__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="4" y1="21" x2="4" y2="14" />
+            <line x1="4" y1="10" x2="4" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12" y2="3" />
+            <line x1="20" y1="21" x2="20" y2="16" />
+            <line x1="20" y1="12" x2="20" y2="3" />
+            <line x1="1" y1="14" x2="7" y2="14" />
+            <line x1="9" y1="8" x2="15" y2="8" />
+            <line x1="17" y1="16" x2="23" y2="16" />
+          </svg>
+          <h3 class="feature-card__title">Налаштування обсягу тесту</h3>
+          <p class="feature-card__desc">
+            Самостійний вибір кількості питань перед початком тестування — від
+            кількох питань до повного обсягу розділу.
+          </p>
+        </div>
+        <div class="feature-card">
+          <svg
+            class="feature-card__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+          <h3 class="feature-card__title">Зручна навігація</h3>
+          <p class="feature-card__desc">
+            Перехід до будь-якого питання тесту та повернення до попередніх
+            відповідей у будь-який момент проходження.
+          </p>
+        </div>
+        <div class="feature-card">
+          <svg
+            class="feature-card__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+          </svg>
+          <h3 class="feature-card__title">Збереження прогресу</h3>
+          <p class="feature-card__desc">
+            Автоматичне збереження незавершеного тесту з можливістю продовжити
+            його пізніше.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="page-tests" class="page">
+      <header class="page-header">
+        <button class="btn-back" onclick="showPage('page-home')">
+          ← Назад
+        </button>
+        <h2 class="page-title">Вибір тестування</h2>
+      </header>
+      <div class="test-choice">
+        <div class="choice-card choice-card--full">
+          <svg
+            class="choice-card__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <path
+              d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+            />
+          </svg>
+          <div class="choice-card__body">
+            <h3 class="choice-card__title">Всі розділи</h3>
+            <p class="choice-card__desc">
+              Тест, що охоплює питання з усіх тем одразу
+            </p>
+          </div>
+          <span class="choice-card__arrow">→</span>
+        </div>
+        <h3 class="section-label">Або обери конкретний розділ</h3>
+        <div class="topics-grid" id="topics-grid"></div>
+      </div>
+    </div>
+
+    <div id="page-topic-tests" class="page">
+      <header class="page-header">
+        <button class="btn-back" onclick="showPage('page-tests')">
+          ← До розділів
+        </button>
+        <h2 class="page-title">
+          <span id="topic-test-page-icon"></span>
+          <span id="topic-test-page-title">Розділ</span>
+        </h2>
+      </header>
+      <div class="test-choice">
+        <div
+          class="choice-card choice-card--full"
+          id="topic-test-all-card"
+        ></div>
+        <h3 class="section-label">Або обери конкретний підрозділ</h3>
+        <div class="topics-grid" id="topic-test-subtopics-grid"></div>
+      </div>
+    </div>
+
+    <div id="page-learn" class="page">
+      <header class="page-header">
+        <button class="btn-back" onclick="showPage('page-home')">
+          ← Назад
+        </button>
+        <h2 class="page-title">Навчальні матеріали</h2>
+      </header>
+      <p class="page-intro">
+        Обери розділ, щоб ознайомитись з матеріалами перед тестуванням.
+      </p>
+      <div class="topics-grid" id="learn-topics-grid"></div>
+    </div>
+
+    <div id="page-topic-learn" class="page">
+      <header class="page-header">
+        <button class="btn-back" onclick="showPage('page-learn')">
+          ← До розділів
+        </button>
+        <h2 class="page-title">
+          <span id="topic-learn-page-icon"></span>
+          <span id="topic-learn-page-title">Розділ</span>
+        </h2>
+      </header>
+      <div class="topic-intro" id="topic-learn-intro"></div>
+      <h3 class="section-label">Підрозділи</h3>
+      <div class="learn-list" id="topic-learn-subtopics"></div>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay">
+      <div class="modal">
+        <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <div id="page-test-all" class="page page--test">
+      <header class="page-header">
+        <button class="btn-back" onclick="confirmExitQuiz()">
+          ← До вибору
+        </button>
+        <h2 class="page-title" id="test-title">Тест</h2>
+        <div class="quiz-timer" id="quiz-timer">00:00</div>
+      </header>
+
+      <div class="quiz-layout">
+        <aside class="quiz-nav">
+          <p class="quiz-nav__label">
+            Відповідено: <span id="qnav-answered">0</span>/<span id="qnav-total"
+              >0</span
+            >
+          </p>
+          <div class="quiz-nav__grid" id="question-nav"></div>
+          <div class="quiz-nav__pager" id="quiz-nav-pager">
+            <button
+              type="button"
+              class="qnav-pager-btn"
+              id="qnav-prev-page"
+              aria-label="Попередні питання"
+            >
+              ‹
+            </button>
+            <span class="quiz-nav__pager-label" id="qnav-page-label">1–40</span>
+            <button
+              type="button"
+              class="qnav-pager-btn"
+              id="qnav-next-page"
+              aria-label="Наступні питання"
+            >
+              ›
+            </button>
+          </div>
+          <div class="quiz-nav__legend">
+            <span
+              ><i class="legend-dot legend-dot--answered"></i>Відповідено</span
+            >
+            <span><i class="legend-dot legend-dot--current"></i>Поточне</span>
+          </div>
+          <button
+            type="button"
+            class="btn btn--secondary btn--sm quiz-nav__finish"
+            id="btn-finish-sidebar"
+            onclick="attemptFinishTest()"
+          >
+            Завершити тест ✓
+          </button>
+        </aside>
+
+        <div class="quiz-wrap">
+          <div class="quiz-progress">
+            <div class="quiz-progress__bar" id="progress-bar"></div>
+          </div>
+          <p class="quiz-counter" id="quiz-counter">Питання 1 з 10</p>
+
+          <div id="quiz-question-wrap">
+            <div class="quiz-question" id="quiz-question"></div>
+            <div class="quiz-options" id="quiz-options"></div>
+          </div>
+
+          <div class="quiz-actions">
+            <button
+              class="btn btn--secondary"
+              id="btn-prev"
+              onclick="prevQuestion()"
+            >
+              ← Попереднє
+            </button>
+            <button
+              class="btn btn--primary"
+              id="btn-next"
+              onclick="nextQuestion()"
+            >
+              Наступне →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="page-results" class="page">
+      <div class="results-wrap">
+        <div class="results-icon" id="results-icon"></div>
+        <h2 class="results-title">Тест завершено</h2>
+        <div class="results-score">
+          <span id="final-score">0</span>/<span id="max-score">0</span>
+        </div>
+        <p class="results-label" id="results-label"></p>
+        <p class="results-time">
+          Час виконання: <span id="results-time">—</span>
+        </p>
+        <div class="results-actions">
+          <button class="btn btn--primary" onclick="showPage('page-tests')">
+            Інші тести
+          </button>
+          <button class="btn btn--secondary" onclick="showPage('page-home')">
+            На головну
+          </button>
+        </div>
+      </div>
+      <div class="review-wrap">
+        <h3 class="review-title">Розбір питань</h3>
+        <div id="review-list"></div>
+      </div>
+    </div>
+
+    <script src="js/data/topic-html.js"></script>
+    <script src="js/data/topic-css.js"></script>
+    <script src="js/data/topic-javascript.js"></script>
+    <script src="js/data/topics.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/test-selection.js"></script>
+    <script src="js/learn.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/results.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
